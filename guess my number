@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guess My Number</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', monospace;
+      background-color: black;
+      color: rgb(255, 255, 255);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+      text-align: center;
+    }
+
+    .number-box {
+      font-size: 3rem;
+      font-weight: bold;
+      border: 3px solid white;
+      width: 100px;
+      height: 100px;
+      text-align: center;
+      line-height: 100px;
+      margin-bottom: 20px;
+    }
+
+    input[type="number"] {
+      padding: 10px;
+      font-size: 1.2rem;
+      width: 60px;
+      margin-right: 10px;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: white;
+      color: black;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: gray;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 1.5rem;
+    }
+
+    .score-board {
+      margin-top: 10px;
+      font-size: 1.2rem;
+    }
+
+    .game-container {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="game-container">
+    <h1>Guess My Number (1–20)</h1>
+    <div class="number-box" id="numberBox">-?-</div>
+
+    <input type="number" id="guessInput" min="1" max="20" />
+    <button onclick="checkGuess()">Check</button>
+    <button onclick="resetGame()">Again</button>
+
+    <div class="message" id="message">Start guessing...</div>
+    <div class="score-board">
+      💯 Score: <span id="score">20</span> &nbsp;&nbsp;
+      🏆 High Score: <span id="highScore">0</span>
+    </div>
+  </div>
+
+  <script>
+    let secretNumber = Math.trunc(Math.random() * 20) + 1;
+    let score = 20;
+    let highScore = 0;
+
+    function displayMessage(msg) {
+      document.getElementById('message').textContent = msg;
+    }
+
+    function checkGuess() {
+
+      const guess = Number(document.getElementById('guessInput').value);
+
+      if (!guess || guess < 1 || guess > 20) {
+        displayMessage('⛔ Enter a number 1–20!');
+        return;
+      }
+
+      if (guess === secretNumber) {
+        displayMessage('🎉 Correct Number!');
+        document.getElementById('numberBox').textContent = secretNumber;
+          document.body.style.backgroundColor = 'green';
+
+        if (score > highScore) {
+          highScore = score;
+          document.getElementById('highScore').textContent = highScore;
+        }
+      } else {
+        if (score > 1) {
+          displayMessage(guess > secretNumber ? '📈 Too High!' : '📉 Too Low!');
+          score--;
+          document.getElementById('score').textContent = score;
+        } else {
+          displayMessage('💥 You lost the game!');
+          document.getElementById('score').textContent = 0;
+        }
+      }
+    }
+
+    function resetGame() {
+      secretNumber = Math.trunc(Math.random() * 20) + 1;
+      score = 20;
+      document.getElementById('score').textContent = score;
+      document.getElementById('numberBox').textContent = '-?-';
+      document.getElementById('message').textContent = 'Start guessing...';
+      document.getElementById('guessInput').value = '';
+      document.body.style.backgroundColor = 'black'; 
+
+    }
+  </script>
+
+</body>
+</html>
