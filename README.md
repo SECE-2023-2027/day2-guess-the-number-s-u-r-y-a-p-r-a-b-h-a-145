@@ -1,6 +1,10 @@
 🤔 Guess My Number
+
+
 📌 Description:
 A single-player number guessing game between 1 and 20. The player tries to guess the secret number with clues and a score counter.
+
+
 
 🎯 Rules:
 A number between 1 and 20 is randomly generated.
@@ -18,6 +22,8 @@ Input handling and feedback
 Game loop logic and resets
 Styling changes based on game state
 Using variables and storing high score
+
+
 
 
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/mmZ7UzsC)
